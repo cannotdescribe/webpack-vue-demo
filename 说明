@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode development",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode development",   //cross-env 是为了让不同 
     "dev": "cross-env NODE_ENV=development webpack-dev-server  --config webpack.config.js --mode development"
   },
   "author": "",
