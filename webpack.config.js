@@ -50,7 +50,8 @@ var config = {
     ]
 };
 if(mode === 'development'){
-
+    // config.devTool = "#cheap-module-source-map" //编译速度慢，
+    config.devTool = "#cheap-module-eval-source-map" //编译速度快，但可能会发生行号对不上的情况
     config.devServer={
         port: 8080,
         ip: '0.0.0.0',
