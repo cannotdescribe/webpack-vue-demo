@@ -2,7 +2,7 @@
     <div id="test">{{text}}</div>
 </template>
 <script>
-    export  default {
+    export default {
         data(){
             return {
                 text: "abc"
