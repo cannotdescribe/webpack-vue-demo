@@ -17,6 +17,10 @@ var config = {
                 loader: "vue-loader"
             },
             {
+                test: /\.jsx$/,
+                loader: "babel-loader"
+            },
+            {
                 test: /\.css$/,
                 use: [
                     "style-loader",
@@ -28,6 +32,12 @@ var config = {
                 use: [
                     "style-loader",
                     "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            sourceMap: true,
+                        }
+                    },
                     "stylus-loader"  //stylus 很好用的css预处理器  (可以研究一下)
                 ]
             },
@@ -46,19 +56,28 @@ var config = {
         ]
     },
     plugins: [
-        new HTMLPlugin()
+        new HTMLPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
 if(mode === 'development'){
     // config.devTool = "#cheap-module-source-map" //编译速度慢，
-    config.devTool = "#cheap-module-eval-source-map" //编译速度快，但可能会发生行号对不上的情况
+    // config.devTool = "#cheap-module-eval-source-map" //编译速度快，但可能会发生行号对不上的情况
+    config.devtool = 'inline-source-map',
     config.devServer={
         port: 8080,
-        ip: '0.0.0.0',
+        compress: true,
+        host: "127.0.0.1",
         overlay:{
             errors: true
         },
-        hot: true
+        hot: true,
+        historyApiFallback:{
+            //做单页应用时，通常会做前端路由，我们页面请求进来的地址不一定就是我们默认的index.html页面
+            //这个能帮助我们将本身不理解的地址，没有做映射的地址都映射到一个入口index.html 上面去
+        },
+        open: true //webpack开启后 自动打开浏览器
+
     }
 }
 
