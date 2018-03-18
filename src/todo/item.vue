@@ -57,8 +57,8 @@
         width: 40px;
         height: 40px;
         position: absolute;
-        top:0;
-        bottom:0;
+        top: 0;
+        bottom: 0;
         margin: auto 0
         border: none
         appearance: none;
