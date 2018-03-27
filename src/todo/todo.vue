@@ -5,7 +5,7 @@
         placeholder="接下去要做什么"
         @keyup.enter="addTodo"/>
         <!-- v-on:keyup="addTodo" -->
-        <Item :todo="todo"></Item>
+        <Item :todo="todo" v-for="todo in todos" :key="todo.id"/>
         <Tabs filter="all"></Tabs>
     </section>
 </template>
@@ -13,15 +13,11 @@
 <script>
     import Item from "./item.vue"
     import Tabs from "./tabs.vue"
-
+    var id = 0;
     export default{
         data(){
             return {
-                todo:{
-                    id:0,
-                    content: "this is todo",
-                    completed: false
-                },
+                todos:[],
                 filter:"all"
             }
         },
@@ -29,8 +25,17 @@
             Item, Tabs
         },
         methods: {
-            addTodo(){
-
+            addTodo(ev){
+                var _this = this;
+                this.todos.unshift({
+                    id: id++,
+                    content: ev.target.value.trim(),
+                    completed: false,
+                    deleteMethod(){
+                        _this.todos.splice(0,1);
+                    }
+                })
+                ev.target.value ="";
             }
         }
     }

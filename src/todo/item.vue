@@ -14,12 +14,13 @@
         props:{
             todo:{
                 type: Object,
-                required: true
+                required: true,
             }
         },
         methods: {
-            deleteTodp(){
-
+            deleteTodo(){
+                this.todo.deleteMethod();
+//                this.$emit("del", this.todo.id);
             }
         }
     }
