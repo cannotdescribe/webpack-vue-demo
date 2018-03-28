@@ -5,8 +5,8 @@
         placeholder="接下去要做什么"
         @keyup.enter="addTodo"/>
         <!-- v-on:keyup="addTodo" -->
-        <Item  :todo="todo" v-for="todo in todos" :key="todo.id" @del="del"/>
-        <Tabs filter="all"></Tabs>
+        <Item  :todo="todo" v-for="todo in todoFiltered" :key="todo.id" @del="del"/>
+        <Tabs :filter="filter" :todos="todos" @state="clickState"></Tabs>
     </section>
 </template>
 
@@ -19,6 +19,17 @@
             return {
                 todos:[],
                 filter:"all"
+            }
+        },
+        computed:{
+            todoFiltered(){
+                if(this.filter === "all"){
+                    return this.todos;
+                }
+                const completed = this.filter === "completed";
+                var av = this.todos.filter(todo => todo.completed === completed);
+                console.log(av);
+                return av;
             }
         },
         components:{
@@ -36,6 +47,9 @@
             },
             del(id){
                 this.todos.splice(this.todos.findIndex(todo => todo.id === id ), 1);
+            },
+            clickState(state){
+                this.filter = state;
             }
         }
     }
