@@ -5,7 +5,7 @@
         placeholder="接下去要做什么"
         @keyup.enter="addTodo"/>
         <!-- v-on:keyup="addTodo" -->
-        <Item :todo="todo" v-for="todo in todos" :key="todo.id"/>
+        <Item  :todo="todo" v-for="todo in todos" :key="todo.id" @del="del"/>
         <Tabs filter="all"></Tabs>
     </section>
 </template>
@@ -30,12 +30,12 @@
                 this.todos.unshift({
                     id: id++,
                     content: ev.target.value.trim(),
-                    completed: false,
-                    deleteMethod(){
-                        _this.todos.splice(0,1);
-                    }
-                })
+                    completed: false
+                });
                 ev.target.value ="";
+            },
+            del(id){
+                this.todos.splice(this.todos.findIndex(todo => todo.id === id ), 1);
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['todo-item', todo.completed ? 'competed' : '']">
+    <div :class="['todo-item', todo.completed ? 'completed' : '']">
         <input type="checkbox"
         class="toggle"
         v-model="todo.completed"
@@ -19,8 +19,9 @@
         },
         methods: {
             deleteTodo(){
-                this.todo.deleteMethod();
-//                this.$emit("del", this.todo.id);
+//                console.log(this);
+//                this.todo.deleteMethod();
+                this.$emit("del", this.todo.id);
             }
         }
     }
