@@ -40,7 +40,7 @@
 //                this.filter = state;
             },
             clearAllCompleted(){
-
+                this.$emit("clearAll");
             }
         }
     }

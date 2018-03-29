@@ -6,7 +6,7 @@
         @keyup.enter="addTodo"/>
         <!-- v-on:keyup="addTodo" -->
         <Item  :todo="todo" v-for="todo in todoFiltered" :key="todo.id" @del="del"/>
-        <Tabs :filter="filter" :todos="todos" @state="clickState"></Tabs>
+        <Tabs :filter="filter" :todos="todos" @state="clickState" @clearAll="clearAll"></Tabs>
     </section>
 </template>
 
@@ -50,6 +50,9 @@
             },
             clickState(state){
                 this.filter = state;
+            },
+            clearAll(){
+                this.todos.splice(0, this.todos.length);
             }
         }
     }
